@@ -1,0 +1,10 @@
+native:
+  debian:
+    packages:
+      - libtesseract-dev
+  macos-homebrew:
+    packages:
+      - tesseract
+  msys2-mingw64:
+    packages:
+      - mingw-w64-x86_64-tesseract-ocr
