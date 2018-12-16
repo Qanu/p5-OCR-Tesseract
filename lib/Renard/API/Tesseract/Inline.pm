@@ -16,7 +16,10 @@ sub Inline {
 			die $pkg_config->errmsg;
 		}
 
-		$params->{CCFLAGSEX} = $pkg_config->get_cflags;
+		$params->{CCFLAGSEX} = join " ", (
+			'-std=c++11',
+			$pkg_config->get_cflags,
+		);
 		$params->{LIBS} = $pkg_config->get_ldflags;
 		$params->{AUTO_INCLUDE} = q|#include <tesseract/baseapi.h>|;
 
