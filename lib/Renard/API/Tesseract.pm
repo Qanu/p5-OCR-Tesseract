@@ -1,4 +1,5 @@
 package Renard::API::Tesseract;
+# ABSTRACT: API for Tesseract OCR engine
 
 use strict;
 use warnings;
