@@ -2,6 +2,7 @@ native:
   debian:
     packages:
       - libtesseract-dev
+      - tesseract-ocr-eng
   macos-homebrew:
     packages:
       - tesseract
