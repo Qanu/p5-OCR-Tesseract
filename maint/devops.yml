@@ -3,6 +3,7 @@ native:
     packages:
       - libtesseract-dev
       - tesseract-ocr-eng
+      - libleptonica-dev
   macos-homebrew:
     packages:
       - tesseract
