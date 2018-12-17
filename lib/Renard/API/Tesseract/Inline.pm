@@ -2,7 +2,7 @@ use Modern::Perl;
 package Renard::API::Tesseract::Inline;
 # ABSTRACT: Provide Inline configuration for Tesseract
 
-use PkgConfig;
+use ExtUtils::PkgConfig;
 
 use constant PKG_CONFIG => 'tesseract';
 
@@ -11,16 +11,13 @@ sub Inline {
 
 	if( $lang eq 'CPP' ) {
 		my $params;
-		my $pkg_config = PkgConfig->find(PKG_CONFIG);
-		if( $pkg_config->errmsg ) {
-			die $pkg_config->errmsg;
-		}
+		my %pkg_config = ExtUtils::PkgConfig->find(PKG_CONFIG);
 
 		$params->{CCFLAGSEX} = join " ", (
 			'-std=c++11',
-			$pkg_config->get_cflags,
+			$pkg_config{cflags},
 		);
-		$params->{LIBS} = $pkg_config->get_ldflags;
+		$params->{LIBS} = $pkg_config{libs};
 		$params->{AUTO_INCLUDE} = q|#include <tesseract/baseapi.h>|;
 
 		return $params;
