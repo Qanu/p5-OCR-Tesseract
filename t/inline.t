@@ -17,7 +17,7 @@ SKIP: {
 		skip "Inline::CPP not installed", 1 if $error;
 	};
 
-	Inline->import( with => qw(Renard::API::Tesseract::Inline) );
+	Inline->import( with => qw(Renard::API::Tesseract::Inline Alien::Leptonica) );
 
 	subtest 'Retrieve a constant' => sub {
 		Inline->bind( CPP => q|
