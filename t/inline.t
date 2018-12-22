@@ -9,6 +9,8 @@ use File::Basename;
 use File::Spec;
 use Cwd 'abs_path';
 
+use Env qw($TESSDATA_PREFIX);
+
 use_ok('Renard::API::Tesseract::Inline');
 
 SKIP: {
@@ -18,6 +20,13 @@ SKIP: {
 	};
 
 	Inline->import( with => qw(Renard::API::Tesseract::Inline) );
+
+	if( exists $ENV{MSYSTEM} ) {
+		# q|C:\msys64\mingw64\share\tessdata|;
+		$TESSDATA_PREFIX = File::Spec->catfile(dirname($^X), qw(.. share tessdata));
+	}
+
+	$TESSDATA_PREFIX ||= undef;
 
 	subtest 'Retrieve a constant' => sub {
 		Inline->bind( CPP => q|
@@ -39,7 +48,10 @@ SKIP: {
 		Inline->bind( CPP => q|
 			#include <locale.h>
 
-			int tess_init() {
+			int tess_init(SV* tessdata_path_sv) {
+				// If undef, use NULL to use default TESSDATA_PREFIX
+				char* tessdata_path = SvOK(tessdata_path_sv) ? SvPV_nolen(tessdata_path_sv) : NULL;
+
 				// Tesseract initialisation requires "C" locale.
 				// See:
 				//   - <https://github.com/tesseract-ocr/tesseract/pull/1649>,
@@ -49,7 +61,7 @@ SKIP: {
 
 				tesseract::TessBaseAPI *api = new tesseract::TessBaseAPI();
 				// Initialize tesseract-ocr with English, without specifying tessdata path
-				if (api->Init(NULL, "eng")) {
+				if (api->Init(tessdata_path, "eng")) {
 					fprintf(stderr, "Could not initialize tesseract.\n");
 					api->End();
 					return 0;
@@ -63,7 +75,7 @@ SKIP: {
 
 		{
 			no locale;
-			ok( tess_init(), 'Tesseract intialised');;
+			ok( tess_init($TESSDATA_PREFIX), 'Tesseract intialised');;
 		}
 	};
 
