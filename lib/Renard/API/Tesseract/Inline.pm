@@ -22,7 +22,7 @@ sub Inline {
 			'-std=c++11',
 			$pkg_config{cflags},
 		);
-		$params->{LIBS} = $pkg_config{libs};
+		$params->{LIBS} = join " ", qw(:nosearch), $pkg_config{libs}, qw(:search);
 		$params->{AUTO_INCLUDE} = q|#include <tesseract/baseapi.h>|;
 
 		return $params;
