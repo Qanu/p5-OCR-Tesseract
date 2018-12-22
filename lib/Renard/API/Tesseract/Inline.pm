@@ -6,6 +6,11 @@ use ExtUtils::PkgConfig;
 
 use constant PKG_CONFIG => 'tesseract';
 
+=method Inline
+
+Provides C<Inline> 'with' functionality for the Tesseract OCR library.
+
+=cut
 sub Inline {
 	my ($self, $lang) = @_;
 
