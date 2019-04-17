@@ -5,13 +5,12 @@ use Test::Most;
 use strict;
 use warnings;
 use Module::Load;
-use File::Basename;
-use File::Spec;
 use Cwd 'abs_path';
 
 use Env qw($TESSDATA_PREFIX);
 
 use_ok('Renard::API::Tesseract::Inline');
+use_ok('Renard::API::Tesseract::Base');
 
 SKIP: {
 	eval { load 'Inline::CPP' } or do {
@@ -21,12 +20,7 @@ SKIP: {
 
 	Inline->import( with => qw(Renard::API::Tesseract::Inline) );
 
-	if( exists $ENV{MSYSTEM} ) {
-		# q|C:\msys64\mingw64\share\tessdata|;
-		$TESSDATA_PREFIX = File::Spec->catfile(dirname($^X), qw(.. share tessdata));
-	}
-
-	$TESSDATA_PREFIX ||= undef;
+	$TESSDATA_PREFIX = Renard::API::Tesseract::Base->tessdata_prefix;
 
 	subtest 'Retrieve a constant' => sub {
 		Inline->bind( CPP => q|

@@ -5,6 +5,22 @@ package Renard::API::Tesseract::Base;
 use Inline with => qw(Renard::API::Tesseract::Inline);
 use Renard::API::Tesseract::Base::Inline CPP => 'DATA';
 
+use File::Spec;
+use File::Basename;
+
+classmethod tessdata_prefix() {
+	my $TESSDATA_PREFIX;
+
+	if( exists $ENV{MSYSTEM} ) {
+		# q|C:\msys64\mingw64\share\tessdata|;
+		$TESSDATA_PREFIX = File::Spec->catfile(dirname($^X), qw(.. share tessdata));
+	}
+
+	$TESSDATA_PREFIX ||= undef;
+
+	return $TESSDATA_PREFIX;
+}
+
 1;
 =head1 SEE ALSO
 
