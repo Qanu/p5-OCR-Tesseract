@@ -3,6 +3,8 @@ package Renard::API::Tesseract::Inline;
 # ABSTRACT: Provide Inline configuration for Tesseract
 
 use ExtUtils::PkgConfig;
+use File::Basename;
+use File::Spec;
 
 use constant PKG_CONFIG => 'tesseract';
 
@@ -24,6 +26,9 @@ sub Inline {
 		);
 		$params->{LIBS} = join " ", qw(:nosearch), $pkg_config{libs}, qw(:search);
 		$params->{AUTO_INCLUDE} = q|#include <tesseract/baseapi.h>|;
+
+		my $dir = File::Spec->rel2abs( dirname(__FILE__) );
+		$params->{TYPEMAPS} = File::Spec->catfile( $dir, 'typemap' );
 
 		return $params;
 	}
