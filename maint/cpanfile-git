@@ -1,0 +1,6 @@
+requires 'Renard::Incunabula',
+	git => 'https://github.com/project-renard/p5-Renard-Incunabula.git',
+	branch => 'master';
+requires 'Alien::Leptonica',
+	git => 'https://github.com/EntropyOrg/p5-Alien-Leptonica.git',
+	branch => 'master';

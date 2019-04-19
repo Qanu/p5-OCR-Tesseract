@@ -1,0 +1,13 @@
+native:
+  debian:
+    packages:
+      - libtesseract-dev
+      - tesseract-ocr-eng
+      - libleptonica-dev
+  macos-homebrew:
+    packages:
+      - tesseract
+  msys2-mingw64:
+    packages:
+      - mingw-w64-x86_64-tesseract-ocr
+      - mingw-w64-x86_64-tesseract-data-eng
