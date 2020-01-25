@@ -21,6 +21,10 @@ classmethod tessdata_prefix() {
 	return $TESSDATA_PREFIX;
 }
 
+classmethod new() {
+	Renard::API::Tesseract::Base->_new( $class->tessdata_prefix );
+}
+
 1;
 =head1 SEE ALSO
 

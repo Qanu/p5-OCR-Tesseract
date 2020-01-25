@@ -6,7 +6,7 @@ use Renard::Incunabula::Common::Setup;
 use Renard::API::Tesseract::Base;
 
 subtest "Test" => fun() {
-	my $api = Renard::API::Tesseract::Base->_new(undef);
+	my $api = Renard::API::Tesseract::Base->new;
 	isa_ok $api, 'Renard::API::Tesseract::Base';
 	pass;
 };
