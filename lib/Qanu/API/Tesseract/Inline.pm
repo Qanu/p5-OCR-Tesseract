@@ -1,5 +1,5 @@
 use Modern::Perl;
-package Renard::API::Tesseract::Inline;
+package Qanu::API::Tesseract::Inline;
 # ABSTRACT: Provide Inline configuration for Tesseract
 
 use ExtUtils::PkgConfig;

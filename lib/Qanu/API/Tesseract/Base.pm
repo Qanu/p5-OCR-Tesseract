@@ -1,9 +1,9 @@
 use Renard::Incunabula::Common::Setup;
-package Renard::API::Tesseract::Base;
+package Qanu::API::Tesseract::Base;
 # ABSTRACT: Base API
 
-use Inline with => qw(Renard::API::Tesseract::Inline);
-use Renard::API::Tesseract::Base::Inline CPP => 'DATA';
+use Inline with => qw(Qanu::API::Tesseract::Inline);
+use Qanu::API::Tesseract::Base::Inline CPP => 'DATA';
 
 use File::Spec;
 use File::Basename;
@@ -22,20 +22,20 @@ classmethod tessdata_prefix() {
 }
 
 classmethod new() {
-	Renard::API::Tesseract::Base->_new( $class->tessdata_prefix );
+	Qanu::API::Tesseract::Base->_new( $class->tessdata_prefix );
 }
 
 1;
 =head1 SEE ALSO
 
-L<Repository information|http://project-renard.github.io/doc/development/repo/p5-Renard-API-Tesseract/>
+
 
 =cut
 __DATA__
 __CPP__
 
 using namespace tesseract;
-typedef TessBaseAPI Renard__API__Tesseract__Base;
+typedef TessBaseAPI Qanu__API__Tesseract__Base;
 
 TessBaseAPI* _new(char* CLASS, SV* tessdata_path_sv) {
 	// If undef, use NULL to use default TESSDATA_PREFIX
