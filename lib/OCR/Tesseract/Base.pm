@@ -1,9 +1,9 @@
 use Renard::Incunabula::Common::Setup;
-package Qanu::API::Tesseract::Base;
+package OCR::Tesseract::Base;
 # ABSTRACT: Base API
 
-use Inline with => qw(Qanu::API::Tesseract::Inline);
-use Qanu::API::Tesseract::Base::Inline CPP => 'DATA';
+use Inline with => qw(OCR::Tesseract::Inline);
+use OCR::Tesseract::Base::Inline CPP => 'DATA';
 
 use File::Spec;
 use File::Basename;
@@ -22,7 +22,7 @@ classmethod tessdata_prefix() {
 }
 
 classmethod new() {
-	Qanu::API::Tesseract::Base->_new( $class->tessdata_prefix );
+	OCR::Tesseract::Base->_new( $class->tessdata_prefix );
 }
 
 1;
@@ -35,7 +35,7 @@ __DATA__
 __CPP__
 
 using namespace tesseract;
-typedef TessBaseAPI Qanu__API__Tesseract__Base;
+typedef TessBaseAPI OCR__Tesseract__Base;
 
 TessBaseAPI* _new(char* CLASS, SV* tessdata_path_sv) {
 	// If undef, use NULL to use default TESSDATA_PREFIX

@@ -1,5 +1,5 @@
 use Modern::Perl;
-package Qanu::API::Tesseract::Inline;
+package OCR::Tesseract::Inline;
 # ABSTRACT: Provide Inline configuration for Tesseract
 
 use ExtUtils::PkgConfig;

@@ -14,8 +14,8 @@ use Cwd 'abs_path';
 
 use Env qw($TESSDATA_PREFIX);
 
-use_ok('Qanu::API::Tesseract::Inline');
-use_ok('Qanu::API::Tesseract::Base');
+use_ok('OCR::Tesseract::Inline');
+use_ok('OCR::Tesseract::Base');
 
 SKIP: {
 	eval { load 'Inline::CPP' } or do {
@@ -23,9 +23,9 @@ SKIP: {
 		skip "Inline::CPP not installed", 1 if $error;
 	};
 
-	Inline->import( with => qw(Alien::Leptonica Qanu::API::Tesseract::Inline) );
+	Inline->import( with => qw(Alien::Leptonica OCR::Tesseract::Inline) );
 
-	$TESSDATA_PREFIX = Qanu::API::Tesseract::Base->tessdata_prefix;
+	$TESSDATA_PREFIX = OCR::Tesseract::Base->tessdata_prefix;
 
 	subtest 'Retrieve a constant' => sub {
 		Inline->bind( CPP => q|

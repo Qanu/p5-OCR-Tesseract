@@ -1,5 +1,5 @@
 use Renard::Incunabula::Common::Setup;
-package Qanu::API::Tesseract;
+package OCR::Tesseract;
 # ABSTRACT: API for Tesseract OCR engine
 
 
